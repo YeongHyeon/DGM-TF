@@ -40,10 +40,10 @@ class DGM(object):
                 self.learning_rate*5, name='Adam_g').minimize(\
                 self.losses['loss_g'], var_list=self.variables['params_g'])
 
-        tf.compat.v1.summary.scalar('DGM/loss_d', self.losses['loss_a'])
-        tf.compat.v1.summary.scalar('DGM/loss_d', self.losses['loss_r'])
-        tf.compat.v1.summary.scalar('DGM/loss_d', self.losses['loss_tv'])
-        tf.compat.v1.summary.scalar('DGM/loss_d', self.losses['loss_g'])
+        tf.compat.v1.summary.scalar('DGM/loss_a', self.losses['loss_a'])
+        tf.compat.v1.summary.scalar('DGM/loss_r', self.losses['loss_r'])
+        tf.compat.v1.summary.scalar('DGM/loss_tv', self.losses['loss_tv'])
+        tf.compat.v1.summary.scalar('DGM/loss_g', self.losses['loss_g'])
         tf.compat.v1.summary.scalar('DGM/loss_d', self.losses['loss_d'])
         self.summaries = tf.compat.v1.summary.merge_all()
 
