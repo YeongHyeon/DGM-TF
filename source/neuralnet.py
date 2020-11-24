@@ -190,7 +190,7 @@ class DGM(object):
 
         # For D optimization
         d_real_term = \
-            self.loss_l2(self.variables['d_real'] - tf.ones_like(self.variables['d_fake']), [1])
+            self.loss_l2(self.variables['d_real'] - tf.ones_like(self.variables['d_real']), [1])
         d_fake_term = \
             self.loss_l2(self.variables['d_fake'] - tf.zeros_like(self.variables['d_fake']), [1])
         self.losses['loss_d'] = tf.compat.v1.reduce_mean(0.5 * (d_real_term + d_fake_term))
