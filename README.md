@@ -31,9 +31,9 @@ TensorFlow implementation of Disentangled Generative Model (DGM) with MNIST data
 ### Training Procedure
 <div align="center">
   <p>
-    <img src="./figures/DGM_loss_a.svg" width="300">
-    <img src="./figures/DGM_loss_r.svg" width="300">
-    <img src="./figures/DGM_loss_tv.svg" width="300">
+    <img src="./figures/DGM_loss_a.svg" width="200">
+    <img src="./figures/DGM_loss_r.svg" width="200">
+    <img src="./figures/DGM_loss_tv.svg" width="200">
   </p>
   <p>Losses for training generative components.</p>
 </div>
