@@ -37,7 +37,7 @@ class DGM(object):
 
         with tf.control_dependencies(self.variables['ops_g']):
             self.optimizer_g = tf.compat.v1.train.AdamOptimizer( \
-                self.learning_rate*5, name='Adam_g').minimize(\
+                self.learning_rate, name='Adam_g').minimize(\
                 self.losses['loss_g'], var_list=self.variables['params_g'])
 
         tf.compat.v1.summary.scalar('DGM/loss_a', self.losses['loss_a'])
