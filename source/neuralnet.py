@@ -172,10 +172,11 @@ class DGM(object):
         shift_i = tf.roll(self.variables['y_hat'], shift=[1], axis=[1])
         shift_j = tf.roll(self.variables['y_hat'], shift=[1], axis=[2])
         tv_i_term = \
-            self.loss_l1(self.variables['y_hat'] - shift_i, [1, 2, 3])
+            tf.math.abs(self.variables['y_hat'] - shift_i)
         tv_j_term = \
-            self.loss_l1(self.variables['y_hat'] - shift_j, [1, 2, 3])
-        self.losses['loss_tv'] = tv_i_term + tv_j_term
+            tf.math.abs(self.variables['y_hat'] - shift_j)
+        self.losses['loss_tv'] = \
+            tf.compat.v1.reduce_sum(tv_i_term + tv_j_term, axis=[1, 2, 3])
 
         lambda_a, lambda_r, lambda_tv = 10, 10, 1 # in paper
         term_a = lambda_a * self.losses['loss_a']
@@ -190,9 +191,9 @@ class DGM(object):
 
         # For D optimization
         d_real_term = \
-            self.loss_l2(self.variables['d_real'] - tf.ones_like(self.variables['d_real']), [1])
+            self.loss_l2(self.variables['d_real'] - tf.zeros_like(self.variables['d_real']), [1])
         d_fake_term = \
-            self.loss_l2(self.variables['d_fake'] - tf.zeros_like(self.variables['d_fake']), [1])
+            self.loss_l2(self.variables['d_fake'] - tf.ones_like(self.variables['d_fake']), [1])
         self.losses['loss_d'] = tf.compat.v1.reduce_mean(0.5 * (d_real_term + d_fake_term))
 
         self.losses['mse'] = \
