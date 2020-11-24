@@ -60,7 +60,7 @@ class Dataset(object):
                 y_abnormal.append(y_tmp)
 
             if(not(x_normal is None) and not(x_abnormal is None)):
-                if((len(x_normal) >= 2000) and len(x_normal) >= 2000): break
+                if((len(x_normal) >= 2000) and len(x_abnormal) >= 2000): break
 
         x_normal = np.asarray(x_normal)
         y_normal = np.asarray(y_normal)
