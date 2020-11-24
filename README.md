@@ -14,7 +14,7 @@ TensorFlow implementation of Disentangled Generative Model (DGM) with MNIST data
 ### DGM architecture
 <div align="center">
   <img src="./figures/dgm.png" width="500">  
-  <p>The architecture of DGM [1].</p>
+  <p>The architecture of DGM.</p>
 </div>
 
 ### Graph in TensorBoard
