@@ -5,8 +5,11 @@ TensorFlow implementation of Disentangled Generative Model (DGM) with MNIST data
 
 ## Architecture
 
-### Losses
-
+### Objective Functions
+<div align="center">
+  <img src="./figures/losses.png" width="300">  
+  <p>The objective functions (losses) for training DGM [1].</p>
+</div>
 
 ### DGM architecture
 <div align="center">
