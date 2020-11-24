@@ -109,9 +109,9 @@ def test(neuralnet, dataset, batch_size):
         x_te, y_te, terminator = dataset.next_test(1)
 
         step_dict = neuralnet.step(x=x_te, y=y_te, training=False)
-        y_hat, loss_enc = step_dict['y_hat'], step_dict['loss_d']
+        y_hat, mse = step_dict['y_hat'], step_dict['mse']
         if(y_te[0] == 1):
-            loss_list.append(loss_enc)
+            loss_list.append(mse)
 
         if(terminator): break
 
@@ -130,12 +130,12 @@ def test(neuralnet, dataset, batch_size):
         x_te, y_te, terminator = dataset.next_test(1)
 
         step_dict = neuralnet.step(x=x_te, y=y_te, training=False)
-        y_hat, loss_enc = step_dict['y_hat'], step_dict['loss_d']
+        y_hat, mse = step_dict['y_hat'], step_dict['mse']
 
-        loss4box[y_te[0]].append(loss_enc)
+        loss4box[y_te[0, 0]].append(mse)
 
-        outcheck = loss_enc > outbound
-        fcsv.write("%d, %.5f, %r\n" %(y_te, loss_enc, outcheck))
+        outcheck = mse > outbound
+        fcsv.write("%d, %.5f, %r\n" %(y_te, mse, outcheck))
 
         [h, w, c] = y_hat[0].shape
         canvas = np.ones((h, w*3, c), np.float32)
@@ -143,9 +143,9 @@ def test(neuralnet, dataset, batch_size):
         canvas[:, w:w*2, :] = y_hat[0]
         canvas[:, w*2:, :] = (x_te[0]-y_hat[0])**2
         if(outcheck):
-            plt.imsave(os.path.join("test", "outbound", "%08d-%08d.png" %(testnum, int(loss_enc))), gray2rgb(gray=canvas))
+            plt.imsave(os.path.join("test", "outbound", "%08d-%08d.png" %(testnum, int(mse))), gray2rgb(gray=canvas))
         else:
-            plt.imsave(os.path.join("test", "inbound", "%08d-%08d.png" %(testnum, int(loss_enc))), gray2rgb(gray=canvas))
+            plt.imsave(os.path.join("test", "inbound", "%08d-%08d.png" %(testnum, int(mse))), gray2rgb(gray=canvas))
 
         testnum += 1
 

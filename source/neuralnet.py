@@ -76,11 +76,11 @@ class DGM(object):
             for summaries in summary_list:
                 self.summary_writer.add_summary(summaries, iteration)
 
-        y_hat, loss_d, loss_g = \
-            self.sess.run([self.variables['y_hat'], self.losses['loss_d'], self.losses['loss_g']], \
+        y_hat, loss_d, loss_g, mse = \
+            self.sess.run([self.variables['y_hat'], self.losses['loss_d'], self.losses['loss_g'], self.losses['mse']], \
             feed_dict=feed_te)
 
-        outputs = {'y_hat':y_hat, 'loss_d':loss_d, 'loss_g':loss_g}
+        outputs = {'y_hat':y_hat, 'loss_d':loss_d, 'loss_g':loss_g, 'mse':mse}
         return outputs
 
     def save_parameter(self, model='model_checker', epoch=-1):
@@ -193,6 +193,9 @@ class DGM(object):
         d_fake_term = tf.math.square(\
             self.variables['d_fake'] - tf.ones_like(self.variables['d_fake']) + 1e-9)
         self.losses['loss_d'] = tf.compat.v1.reduce_mean(0.5 * (d_real_term + d_fake_term))
+
+        self.losses['mse'] = \
+            tf.compat.v1.reduce_mean(self.loss_l2(self.variables['y_hat'] - self.x, [1, 2, 3]))
 
         self.variables['params_d'], self.variables['params_g'] = [], []
         for var in tf.compat.v1.trainable_variables():

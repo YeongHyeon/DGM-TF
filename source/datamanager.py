@@ -51,13 +51,13 @@ class Dataset(object):
         for yidx, y in enumerate(y_tot):
 
             y_tmp = np.expand_dims(y_tot[yidx], axis=0)
-            # Normal: 0, Abnormal: 1
+
             if(y == 1): # as normal
                 x_normal.append(x_tot[yidx])
-                y_normal.append(y_tmp * 0)
+                y_normal.append(y_tmp)
             else: # as abnormal
                 x_abnormal.append(x_tot[yidx])
-                y_abnormal.append((y_tmp * 0) + 1)
+                y_abnormal.append(y_tmp)
 
             if(not(x_normal is None) and not(x_abnormal is None)):
                 if((len(x_normal) >= 2000) and len(x_normal) >= 2000): break
@@ -67,11 +67,13 @@ class Dataset(object):
         x_abnormal = np.asarray(x_abnormal)
         y_abnormal = np.asarray(y_abnormal)
 
-        self.x_tr, self.y_tr = x_normal[:1000], y_normal[:1000]
+        # for panalty term adjust training set only.
+        # Normal: 0, Abnormal: 1
+        self.x_tr, self.y_tr = x_normal[:1000], (y_normal[:1000] * 0)
         self.x_te, self.y_te = x_normal[1000:], y_normal[1000:]
 
         self.x_tr = np.append(self.x_tr, x_abnormal[:1000], axis=0)
-        self.y_tr = np.append(self.y_tr, y_abnormal[:1000], axis=0)
+        self.y_tr = np.append(self.y_tr, (y_abnormal[:1000] * 0) + 1, axis=0)
 
         self.x_te = np.append(self.x_te, x_abnormal[1000:], axis=0)
         self.y_te = np.append(self.y_te, y_abnormal[1000:], axis=0)
