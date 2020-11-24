@@ -20,12 +20,72 @@ TensorFlow implementation of Disentangled Generative Model (DGM) with MNIST data
   <p>Graph of DGM.</p>
 </div>
 
+### Problem Definition
+<div align="center">
+  <img src="./figures/definition.png" width="450">  
+  <p>'Class-1' is defined as normal and the others are defined as abnormal.</p>
+</div>
+
 ## Results
 
 ### Training Procedure
+<div align="center">
+  <p>
+    <img src="./figures/DGM_loss_a.svg" width="300">
+    <img src="./figures/DGM_loss_r.svg" width="300">
+    <img src="./figures/DGM_loss_tv.svg" width="300">
+  </p>
+  <p>Losses for training generative components.</p>
+</div>
 
+<div align="center">
+  <p>
+    <img src="./figures/DGM_loss_g.svg" width="300">
+    <img src="./figures/DGM_loss_d.svg" width="300">
+  </p>
+  <p>Loss graphs in the training procedure.</br>Each graph shows generative loss and discriminative loss respectively.</p>
+</div>
+
+<div align="center">
+  <img src="./figures/restoring.png" width="800">  
+  <p>Restoration result by DGM.</p>
+</div>
 
 ### Test Procedure
+<div align="center">
+  <img src="./figures/test-box.png" width="400">
+  <p>Box plot with encoding loss of test procedure.</p>
+</div>
+
+<div align="center">
+  <p>
+    <img src="./figures/in_in01.png" width="130">
+    <img src="./figures/in_in02.png" width="130">
+    <img src="./figures/in_in03.png" width="130">
+  </p>
+  <p>Normal samples classified as normal.</p>
+
+  <p>
+    <img src="./figures/in_out01.png" width="130">
+    <img src="./figures/in_out02.png" width="130">
+    <img src="./figures/in_out03.png" width="130">
+  </p>
+  <p>Abnormal samples classified as normal.</p>
+
+  <p>
+    <img src="./figures/out_in01.png" width="130">
+    <img src="./figures/out_in02.png" width="130">
+    <img src="./figures/out_in03.png" width="130">
+  </p>
+  <p>Normal samples classified as abnormal.</p>
+
+  <p>
+    <img src="./figures/out_out01.png" width="130">
+    <img src="./figures/out_out02.png" width="130">
+    <img src="./figures/out_out03.png" width="130">
+  </p>
+  <p>Abnormal samples classified as abnormal.</p>
+</div>
 
 
 ## Environment
