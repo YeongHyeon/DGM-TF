@@ -91,7 +91,7 @@ def training(neuralnet, dataset, epochs, batch_size, normalize=True):
             iteration += 1
             if(terminator): break
 
-        print("Epoch [%d / %d] (%d iteration) \n G:%.3f, D:%.3f" \
+        print("Epoch [%d / %d] (%d iteration) | G:%.3f, D:%.3f" \
             %(epoch, epochs, iteration, step_dict['loss_g'], step_dict['loss_d']))
         neuralnet.save_parameter(model='model_checker', epoch=epoch)
 
