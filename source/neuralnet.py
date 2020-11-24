@@ -189,9 +189,10 @@ class DGM(object):
         self.losses['loss_tv'] = tf.compat.v1.reduce_mean(term_tv)
 
         # For D optimization
-        d_real_term = tf.math.square(self.variables['d_real'] + 1e-9)
-        d_fake_term = tf.math.square(\
-            self.variables['d_fake'] - tf.ones_like(self.variables['d_fake']) + 1e-9)
+        d_real_term = \
+            self.loss_l2(self.variables['d_real'] - tf.ones_like(self.variables['d_fake']), [1])
+        d_fake_term = \
+            self.loss_l2(self.variables['d_fake'] - tf.zeros_like(self.variables['d_fake']), [1])
         self.losses['loss_d'] = tf.compat.v1.reduce_mean(0.5 * (d_real_term + d_fake_term))
 
         self.losses['mse'] = \
